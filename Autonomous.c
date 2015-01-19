@@ -8,10 +8,5 @@
 task main()
 {
 	waitForStart();
-
-	drive(38,true);
-	turn(-55);
-	drive(16,true);
-	turn(95);
-	drive(13,true);
+	// do nothing.
 }
