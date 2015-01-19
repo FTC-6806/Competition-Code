@@ -64,16 +64,16 @@ task main()
 			motor[Drive_L] = 0;
 			while(driverstop){wait1Msec(1);}
 			startTask(Driver);
-			}
+		}
 
 		if(gunnerstop){
-			//stopTask(Gunner);
+			stopTask(Gunner);
 			motor[Conv1] = 0;
 			motor[Conv2] = 0;
 			motor[Conv3] = 0;
 			motor[Extend] = 0;
 			while(gunnerstop){wait1Msec(1);}
-			//startTask(Gunner);
-			}
+			startTask(Gunner);
+		}
 	}
 }
