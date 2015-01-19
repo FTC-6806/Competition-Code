@@ -5,12 +5,6 @@
 
 #include "Header.h"
 
-
-//task Conveyor()
-//{
-//
-//}
-
 task Driver()
 {
 	while(true)
@@ -50,11 +44,17 @@ task Driverrev()
 	}
 }
 
+task Gunner() {
+	while (true) {
+		// Do nothing.
+	}
+}
+
 task main()
 {
 	waitForStart();
 	startTask(Driver);
-	//startTask(Gunner);
+	startTask(Gunner);
 	startTask(Driverrev);
 	while(true)
 	{
