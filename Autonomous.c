@@ -8,5 +8,5 @@
 task main()
 {
 	waitForStart();
-	// do nothing.
+	drive(15, false);
 }
