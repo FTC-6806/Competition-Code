@@ -36,8 +36,7 @@ float highpower = 100;
 
 #define PI 3.14159265358979323846
 #define WHEEL_DIAMETER 3.5 // in
-#define WHEEL_CIRCUMFRENCE pi * WHEEL_DIAMETER
-
+#define WHEEL_CIRCUMFRENCE PI * WHEEL_DIAMETER
 
 void turn(float t) {
 	t = (t / 360) * full_turn;
@@ -49,14 +48,14 @@ void turn(float t) {
 		nMotorEncoderTarget[Drive_R] = -1 *t;
 		nMotorEncoderTarget[Drive_L] = t;
 
-		motor[Drive_R] = -1 * drive_power;
-		motor[Drive_L] = drive_power;
+		motor[Drive_R] = -1 * drivepower;
+		motor[Drive_L] = drivepower;
 	} else {
 		nMotorEncoderTarget[Drive_R] = t;
 		nMotorEncoderTarget[Drive_L] = -1*t;
 
-		motor[Drive_R] = drive_power;
-		motor[Drive_L] = -1 * drive_power;
+		motor[Drive_R] = drivepower;
+		motor[Drive_L] = -1 * drivepower;
 	}
 
 	while((nMotorRunState[Drive_L] != runStateIdle) && (nMotorRunState[Drive_R] != runStateIdle)) {
@@ -81,8 +80,8 @@ void drive(float distance, bool dis = false) {
 	nMotorEncoderTarget[Drive_R] = distance;
  	nMotorEncoderTarget[Drive_L] = distance;
 
-	motor[Drive_R] = drive_power;
-	motor[Drive_L] = drive_power;
+	motor[Drive_R] = drivepower;
+	motor[Drive_L] = drivepower;
 
 	while((nMotorRunState[Drive_L] != runStateIdle) && (nMotorRunState[Drive_R] != runStateIdle)) {
 		wait1Msec(1);
