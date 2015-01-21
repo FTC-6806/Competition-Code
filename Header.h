@@ -38,6 +38,9 @@ float highpower = 100;
 #define WHEEL_DIAMETER 3.5 // in
 #define WHEEL_CIRCUMFRENCE PI * WHEEL_DIAMETER
 
+int one_turn = 1440;
+int full_turn = 5500; //1325; 5300
+
 void turn(float t) {
 	t = (t / 360) * full_turn;
 
