@@ -45,9 +45,7 @@ task Driverrev()
 }
 
 task Gunner() {
-	while (true) {
-		// Do nothing.
-	}
+	// nothing
 }
 
 task main()
