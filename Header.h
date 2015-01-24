@@ -44,21 +44,6 @@ float rightdrive()
 	else{return joystick.joy1_y1 / 127.0 * drivepower;}
 }
 
-
-// routines to calculate left and right drive powers
-float leftdrive()
-{
-	if(ABS(joystick.joy1_y1) < deadband){return 0;}
-	else{return joystick.joy1_y1 / 127 * drivepower;}
-}
-
-float rightdrive()
-{
-	if(ABS(joystick.joy1_y2) < deadband){return 0;}
-	else{return joystick.joy1_y2 / 127 * drivepower;}
-}
-
-
 /* ========< Maths >========= */
 #define PI 3.14159265358979323846
 
