@@ -79,18 +79,13 @@ void turn(float t) {
 }
 
 // drive: drive the robot
-// @param float distance : distance to drive
-// @param bool dis=false : 
-void drive(float distance, bool dis = false) {
-	if (dis) {
-		distance = distance / WHEEL_CIRCUMFRENCE;
-	}
-
+// @param float rotations : rotations to move
+void drive_r(float rotations) {
 	nMotorEncoder[Drive_R] = 0;
 	nMotorEncoder[Drive_L] = 0;
 
-	nMotorEncoderTarget[Drive_R] = distance;
- 	nMotorEncoderTarget[Drive_L] = distance;
+	nMotorEncoderTarget[Drive_R] = rotations;
+ 	nMotorEncoderTarget[Drive_L] = rotations;
 
 	motor[Drive_R] = drivepower;
 	motor[Drive_L] = drivepower;
@@ -105,3 +100,29 @@ void drive(float distance, bool dis = false) {
 	nMotorEncoder[Drive_R] = 0;
 	nMotorEncoder[Drive_L] = 0;
 }
+
+// drive: drive the robot
+// @param float distance : distance to move in inches
+void drive_d(float distance) {
+	float rotations = distance / WHEEL_CIRCUMFRENCE; 
+	
+	nMotorEncoder[Drive_R] = 0;
+	nMotorEncoder[Drive_L] = 0;
+
+	nMotorEncoderTarget[Drive_R] = rotations;
+ 	nMotorEncoderTarget[Drive_L] = rotations;
+
+	motor[Drive_R] = drivepower;
+	motor[Drive_L] = drivepower;
+
+	while((nMotorRunState[Drive_L] != runStateIdle) && (nMotorRunState[Drive_R] != runStateIdle)) {
+		wait1Msec(1);
+	}
+
+	motor[Drive_R] = 0;
+	motor[Drive_L] = 0;
+
+	nMotorEncoder[Drive_R] = 0;
+	nMotorEncoder[Drive_L] = 0;
+}
+
