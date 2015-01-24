@@ -1,55 +1,52 @@
+// the joystick driver
 #include "Joystickdriver.c"
+
+// define some buttons we use
 #define driverstop joy1Btn(3)
 #define gunnerstop joy2Btn(3)
 #define revbut joy1Btn(1)
 #define drivefast  joy1Btn(5)//||joy1Btn(6)
 #define driveslow joy1Btn(7)//||joy1Btn(8)
 
+// some useful functions
 #define ABS(x)      	    ( (x)>=0?(x):-(x) )
 #define MAX(x,y)          ( (x)>(y)?(x):(y) )
 #define MIN(x,y)          ( (x)<(y)?(y):(x) )
 
+/* ========< Drivetrain and mechanism >======== */
+
+// defines to calculate left and right drive powers
 #define leftdrive (ABS(joystick.joy1_y1)>deadband?(joystick.joy1_y1 / 127 * drivepower):0)
 #define rightdrive (ABS(joystick.joy1_y2)>deadband?(joystick.joy1_y2 / 127 * drivepower):0)
 
 float drivepower;
+// is the servo reversed
 bool revmode;
 
+// a position variable for the servo
 float servoposition = 100;
 
-
-//////////////////////////////////////////////////////////////////////////////////
-//																																							//
-//															Settings																				//
-//																																							//
-//////////////////////////////////////////////////////////////////////////////////
-
+// joystick deadband
 #define deadband 5
+// power values for drivetrain
 #define lowpower 15
 #define normpower 39
 #define highpower 78
 
-
-///////////////////////////////////////////////////////////////////
-//
-//                 Driving functions
-//
-//////////////////////////////////////////////////////////////////
-
+/* ========< Maths >========= */
 #define PI 3.14159265358979323846
+
+/* ========< Driving functions for autonomous >======== */
+
 #define WHEEL_DIAMETER 3.5 // in
 #define WHEEL_CIRCUMFRENCE PI * WHEEL_DIAMETER
 
+// old stuff which shouldn't be depended on
 int one_turn = 1440;
 int full_turn = 5500; //1325; 5300
 
-double map(double x, double in_min, double in_max, double out_min, double out_max)
-{
-	double slope = 1.0 * (out_max - out_min) / (in_max - in_min);
-  return out_min + floor((slope * (x - in_min)) + 0.5);
-}
-
-
+// turn: turn the robot
+// @param float t : degrees to turn
 void turn(float t) {
 	t = (t / 360) * full_turn;
 
@@ -81,6 +78,9 @@ void turn(float t) {
 	nMotorEncoder[Drive_L] = 0;
 }
 
+// drive: drive the robot
+// @param float distance : distance to drive
+// @param bool dis=false : 
 void drive(float distance, bool dis = false) {
 	if (dis) {
 		distance = distance / WHEEL_CIRCUMFRENCE;
