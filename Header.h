@@ -34,14 +34,14 @@ float servoposition = 100;
 // defines to calculate left and right drive powers
 float leftdrive()
 {
-	if(ABS(joystick.joy1_y1) < deadband){return 0;}
-	else{return joystick.joy1_y1 / 127.0 * drivepower;}
+	if(ABS(joystick.joy1_y2) < deadband){return 0;}
+	else{return joystick.joy1_y2 / 127.0 * drivepower;}
 }
 
 float rightdrive()
 {
-	if(ABS(joystick.joy1_y2) < deadband){return 0;}
-	else{return joystick.joy1_y2 / 127.0 * drivepower;}
+	if(ABS(joystick.joy1_y1) < deadband){return 0;}
+	else{return joystick.joy1_y1 / 127.0 * drivepower;}
 }
 
 /* ========< Maths >========= */
