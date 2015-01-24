@@ -1,3 +1,5 @@
+#pragma systemFile
+
 // the joystick driver
 #include "Joystickdriver.c"
 
