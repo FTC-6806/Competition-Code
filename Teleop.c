@@ -67,17 +67,9 @@ task Gunner() {
 task main()
 {
 	waitForStart();
-	//startTask(Driver);
-	//startTask(Gunner);
-	//startTask(DriveReverse);
-	int i = 0;
-	while(i<125)
-	{
-		displayStringAt(0, 63, "%i power", i);
-		motor[Drive_R] = i;
-		i++;
-		wait10Msec(10);
-	}
+	startTask(Driver);
+	startTask(Gunner);
+	startTask(DriveReverse);
 
 	while(true)
 	{
