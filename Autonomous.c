@@ -10,5 +10,5 @@
 task main()
 {
 	waitForStart();
-	drive(15, false);
+	drive_r(15);
 }
