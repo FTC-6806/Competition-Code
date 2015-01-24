@@ -58,87 +58,27 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 #define WHEEL_DIAMETER 3.5 // in
 #define WHEEL_CIRCUMFRENCE PI * WHEEL_DIAMETER
 
-// old stuff which shouldn't be depended on
-int one_turn = 1440;
-int full_turn = 5500; //1325; 5300
+#define tickscale 1000
 
-// turn: turn the robot
-// @param float t : degrees to turn
-void turn(float t) {
-	t = (t / 360) * full_turn;
-
+void drive_r(float rotations, float power) {
+	// reset motor encoders
 	nMotorEncoder[Drive_R] = 0;
 	nMotorEncoder[Drive_L] = 0;
 
-	if (t>0) {
-		nMotorEncoderTarget[Drive_R] = -1 *t;
-		nMotorEncoderTarget[Drive_L] = t;
+	wait1Msec(75);
 
-		motor[Drive_R] = -1 * drivepower;
-		motor[Drive_L] = drivepower;
-	} else {
-		nMotorEncoderTarget[Drive_R] = t;
-		nMotorEncoderTarget[Drive_L] = -1*t;
+	nMotorEncoderTarget[Drive_R] = tickscale * rotations;
+	nMotorEncoderTarget[Drive_L] = tickscale * rotations;
 
-		motor[Drive_R] = drivepower;
-		motor[Drive_L] = -1 * drivepower;
+	// turn motors on
+	motor[Drive_R] = power;
+	motor[Drive_L] = power;
+
+	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
+		// wait for the motors to come to an idle state
 	}
 
-	while((nMotorRunState[Drive_L] != runStateIdle) && (nMotorRunState[Drive_R] != runStateIdle)) {
-		wait1Msec(1);
-	}
-
+	// turn motors off
 	motor[Drive_R] = 0;
 	motor[Drive_L] = 0;
-
-	nMotorEncoder[Drive_R] = 0;
-	nMotorEncoder[Drive_L] = 0;
-}
-
-// drive: drive the robot
-// @param float rotations : rotations to move
-void drive_r(float rotations) {
-	nMotorEncoder[Drive_R] = 0;
-	nMotorEncoder[Drive_L] = 0;
-
-	nMotorEncoderTarget[Drive_R] = rotations;
- 	nMotorEncoderTarget[Drive_L] = rotations;
-
-	motor[Drive_R] = drivepower;
-	motor[Drive_L] = drivepower;
-
-	while((nMotorRunState[Drive_L] != runStateIdle) && (nMotorRunState[Drive_R] != runStateIdle)) {
-		wait1Msec(1);
-	}
-
-	motor[Drive_R] = 0;
-	motor[Drive_L] = 0;
-
-	nMotorEncoder[Drive_R] = 0;
-	nMotorEncoder[Drive_L] = 0;
-}
-
-// drive: drive the robot
-// @param float distance : distance to move in inches
-void drive_d(float distance) {
-	float rotations = distance / WHEEL_CIRCUMFRENCE;
-
-	nMotorEncoder[Drive_R] = 0;
-	nMotorEncoder[Drive_L] = 0;
-
-	nMotorEncoderTarget[Drive_R] = rotations;
- 	nMotorEncoderTarget[Drive_L] = rotations;
-
-	motor[Drive_R] = drivepower;
-	motor[Drive_L] = drivepower;
-
-	while((nMotorRunState[Drive_L] != runStateIdle) && (nMotorRunState[Drive_R] != runStateIdle)) {
-		wait1Msec(1);
-	}
-
-	motor[Drive_R] = 0;
-	motor[Drive_L] = 0;
-
-	nMotorEncoder[Drive_R] = 0;
-	nMotorEncoder[Drive_L] = 0;
 }
