@@ -16,20 +16,6 @@
 #define MIN(x,y)          ( (x)<(y)?(y):(x) )
 
 /* ========< Drivetrain and mechanism >======== */
-
-// defines to calculate left and right drive powers
-float leftdrive()
-{
-	if(ABS(joystick.joy1_y1) < deadband){return 0;}
-	else{return joystick.joy1_y1 / 127 * drivepower;}
-}
-
-float rightdrive()
-{
-	if(ABS(joystick.joy1_y2) < deadband){return 0;}
-	else{return joystick.joy1_y2 / 127 * drivepower;}
-}
-
 float drivepower;
 // is the servo reversed
 bool revmode;
@@ -43,6 +29,20 @@ float servoposition = 100;
 #define lowpower 15
 #define normpower 39
 #define highpower 78
+
+// routines to calculate left and right drive powers
+float leftdrive()
+{
+	if(ABS(joystick.joy1_y1) < deadband){return 0;}
+	else{return joystick.joy1_y1 / 127 * drivepower;}
+}
+
+float rightdrive()
+{
+	if(ABS(joystick.joy1_y2) < deadband){return 0;}
+	else{return joystick.joy1_y2 / 127 * drivepower;}
+}
+
 
 /* ========< Maths >========= */
 #define PI 3.14159265358979323846

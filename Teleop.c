@@ -18,7 +18,7 @@ task Driver()
 			drivepower = normpower;
 		}
 
-		displayStringAt(0, 63, "%i lpower", leftdrive);
+		displayStringAt(0, 63, "%i lpower", leftdrive());
 
 		if(!revmode)
 		{
