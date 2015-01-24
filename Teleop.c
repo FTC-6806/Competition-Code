@@ -60,11 +60,11 @@ task Driverrev()
 task Gunner() {
 	while (true) {
 		if ((joystick.joy2_y1 < -30) && (servoposition > 0)) {
-			servoposition -= 0.05;
+			servoposition -= 0.2;
 		} else if ((joystick.joy2_y1 > 30) && (servoposition < 255)) {
-			servoposition += 0.05;
+			servoposition += 0.2;
 		}
-		servo[GoalGrabber1] = servoposition;
+		servo[GoalGrabber1] = map(servoposition, 0, 360, 0, 255);
 	}
 }
 
