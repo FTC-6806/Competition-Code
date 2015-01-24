@@ -1,6 +1,5 @@
 #pragma systemFile
 
-// the joystick driver
 #include "Joystickdriver.c"
 
 // define some buttons we use
@@ -10,12 +9,13 @@
 #define drivefast  joy1Btn(5)//||joy1Btn(6)
 #define driveslow joy1Btn(7)//||joy1Btn(8)
 
+/* ========< Drivetrain and mechanism >======== */
+
 // some useful functions
 #define ABS(x)      	    ( (x)>=0?(x):-(x) )
 #define MAX(x,y)          ( (x)>(y)?(x):(y) )
 #define MIN(x,y)          ( (x)<(y)?(y):(x) )
 
-/* ========< Drivetrain and mechanism >======== */
 float drivepower;
 // is the servo reversed
 bool revmode;
@@ -45,6 +45,7 @@ float rightdrive()
 }
 
 /* ========< Maths >========= */
+
 #define PI 3.14159265358979323846
 
 double map(double x, double in_min, double in_max, double out_min, double out_max)
