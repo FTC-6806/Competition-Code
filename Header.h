@@ -43,6 +43,13 @@ float servoposition = 100;
 int one_turn = 1440;
 int full_turn = 5500; //1325; 5300
 
+double map(double x, double in_min, double in_max, double out_min, double out_max)
+{
+	double slope = 1.0 * (out_max - out_min) / (in_max - in_min);
+  return out_min + floor((slope * (x - in_min)) + 0.5);
+}
+
+
 void turn(float t) {
 	t = (t / 360) * full_turn;
 
