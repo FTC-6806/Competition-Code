@@ -31,7 +31,7 @@ task Driver()
 	}
 }
 
-task Driverrev()
+task DriveReverse()
 {
 	while(true)
 	{
@@ -66,7 +66,7 @@ task main()
 	waitForStart();
 	startTask(Driver);
 	startTask(Gunner);
-	startTask(Driverrev);
+	startTask(DriveReverse);
 	while(true)
 	{
 		if(driverstop){
