@@ -20,13 +20,13 @@ task Driver()
 
 		if(!revmode)
 		{
-			motor[Drive_L] = leftdrive;
-			motor[Drive_R] = rightdrive;
+			motor[Drive_L] = leftdrive();
+			motor[Drive_R] = rightdrive();
 		}
 		else
 		{
-			motor[Drive_L] = -1*rightdrive;
-			motor[Drive_R] = -1*leftdrive;
+			motor[Drive_L] = -1*rightdrive();
+			motor[Drive_R] = -1*leftdrive();
 		}
 	}
 }

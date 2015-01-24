@@ -18,8 +18,17 @@
 /* ========< Drivetrain and mechanism >======== */
 
 // defines to calculate left and right drive powers
-#define leftdrive (ABS(joystick.joy1_y1)>deadband?(joystick.joy1_y1 / 127 * drivepower):0)
-#define rightdrive (ABS(joystick.joy1_y2)>deadband?(joystick.joy1_y2 / 127 * drivepower):0)
+float leftdrive()
+{
+	if(ABS(joystick.joy1_y1) < deadband){return 0;}
+	else{return joystick.joy1_y1 / 127 * drivepower;}
+}
+
+float rightdrive()
+{
+	if(ABS(joystick.joy1_y2) < deadband){return 0;}
+	else{return joystick.joy1_y2 / 127 * drivepower;}
+}
 
 float drivepower;
 // is the servo reversed
