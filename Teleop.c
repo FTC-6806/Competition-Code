@@ -10,9 +10,20 @@ task Driver()
 {
 	while(true)
 	{
-		if(!drivefast && !driveslow){drivepower = normpower;}
-		if(drivefast){drivepower = highpower;}
-		if(lowpower){drivepower = lowpower;}
+
+
+		if(drivefast) {
+			//displayBigStringAt(0, 63, "drivefast");
+			drivepower = highpower;
+		} else if (driveslow) {
+			//displayBigStringAt(0, 63, "driveslow");
+			drivepower = lowpower;
+		} else {
+			//displayBigStringAt(0, 63, "drivenormal");
+			drivepower = normpower;
+		}
+		//displayBigStringAt(0, 63, "%i lpower", leftdrive);
+
 
 		if(!revmode)
 		{
