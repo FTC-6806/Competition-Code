@@ -26,7 +26,7 @@ float servoposition = 100;
 // power values for drivetrain
 #define lowpower 15.0
 #define normpower 39.0
-#define highpower 78.0
+#define highpower 100.0
 
 // joystick deadband
 #define deadband 5.0
