@@ -38,6 +38,12 @@ float servoposition = 100;
 /* ========< Maths >========= */
 #define PI 3.14159265358979323846
 
+double map(double x, double in_min, double in_max, double out_min, double out_max)
+{
+	double slope = 1.0 * (out_max - out_min) / (in_max - in_min);
+  return out_min + floor((slope * (x - in_min)) + 0.5);
+}
+
 /* ========< Driving functions for autonomous >======== */
 
 #define WHEEL_DIAMETER 3.5 // in
