@@ -11,17 +11,12 @@ task Driver()
 	while(true)
 	{
 		if(drivefast) {
-			//displayBigStringAt(0, 63, "drivefast");
 			drivepower = highpower;
 		} else if (driveslow) {
-			//displayBigStringAt(0, 63, "driveslow");
 			drivepower = lowpower;
 		} else {
-			//displayBigStringAt(0, 63, "drivenormal");
 			drivepower = normpower;
 		}
-		//displayBigStringAt(0, 63, "%i lpower", leftdrive);
-		displayBigStringAt(0, 63, "%s rev", revmode ? "true" : "false");
 
 		if(!revmode)
 		{
