@@ -112,8 +112,8 @@ void drive_r(float rotations) {
 // drive: drive the robot
 // @param float distance : distance to move in inches
 void drive_d(float distance) {
-	float rotations = distance / WHEEL_CIRCUMFRENCE; 
-	
+	float rotations = distance / WHEEL_CIRCUMFRENCE;
+
 	nMotorEncoder[Drive_R] = 0;
 	nMotorEncoder[Drive_L] = 0;
 
