@@ -2,8 +2,8 @@
 #define driverstop joy1Btn(3)
 #define gunnerstop joy2Btn(3)
 #define revbut joy1Btn(1)
-#define drivefast  joy1Btn(5)||joy1Btn(6)
-#define driveslow joy1Btn(7)||joy1Btn(8)
+#define drivefast  joy1Btn(5)//||joy1Btn(6)
+#define driveslow joy1Btn(7)//||joy1Btn(8)
 
 #define ABS(x)      	    ( (x)>=0?(x):-(x) )
 #define MAX(x,y)          ( (x)>(y)?(x):(y) )
@@ -22,10 +22,10 @@ bool revmode;
 //																																							//
 //////////////////////////////////////////////////////////////////////////////////
 
-int deadband = 5;
-float lowpower = 15;
-float normpower = 39;
-float highpower = 78;
+#define deadband 5
+#define lowpower 15
+#define normpower 39
+#define highpower 78
 
 
 ///////////////////////////////////////////////////////////////////
