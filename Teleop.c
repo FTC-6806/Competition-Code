@@ -58,9 +58,6 @@ task Gunner() {
 			servoposition += 0.2;
 		}
 		servo[GoalGrabber1] = map(servoposition, 0, 360, 0, 255);
-    displayStringAt(0, 32, "%d", map(servoposition, 0, 360, 0, 255));
-
-		//servo[GoalGrabber2] = map((servoposition) - 90, 0, 360, 0, 255);
 	}
 }
 
