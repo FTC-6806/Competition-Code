@@ -16,8 +16,6 @@
 #define MIN(x,y)          ( (x)<(y)?(y):(x) )
 
 /* ========< Drivetrain and mechanism >======== */
-
-
 float drivepower;
 // is the servo reversed
 bool revmode;
@@ -44,6 +42,20 @@ float rightdrive()
 {
 	if(ABS(joystick.joy1_y1) < deadband){return 0;}
 	else{return joystick.joy1_y1 / 127.0 * drivepower;}
+}
+
+
+// routines to calculate left and right drive powers
+float leftdrive()
+{
+	if(ABS(joystick.joy1_y1) < deadband){return 0;}
+	else{return joystick.joy1_y1 / 127 * drivepower;}
+}
+
+float rightdrive()
+{
+	if(ABS(joystick.joy1_y2) < deadband){return 0;}
+	else{return joystick.joy1_y2 / 127 * drivepower;}
 }
 
 
