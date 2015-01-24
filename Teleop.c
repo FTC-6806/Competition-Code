@@ -18,7 +18,7 @@ task Driver()
 			drivepower = normpower;
 		}
 
-		displayStringAt(0, 63, "%i lpower", leftdrive);
+		displayStringAt(0, 63, "%i lpower", leftdrive());
 
 		if(!revmode)
 		{
@@ -68,9 +68,18 @@ task Gunner() {
 task main()
 {
 	waitForStart();
-	startTask(Driver);
-	startTask(Gunner);
-	startTask(DriveReverse);
+	//startTask(Driver);
+	//startTask(Gunner);
+	//startTask(DriveReverse);
+	int i = 0;
+	while(i<125)
+	{
+		displayStringAt(0, 63, "%i power", i);
+		motor[Drive_R] = i;
+		i++;
+		wait10Msec(10);
+	}
+
 	while(true)
 	{
 		if(driverstop){

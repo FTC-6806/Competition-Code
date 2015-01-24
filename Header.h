@@ -17,18 +17,6 @@
 
 /* ========< Drivetrain and mechanism >======== */
 
-// defines to calculate left and right drive powers
-float leftdrive()
-{
-	if(ABS(joystick.joy1_y1) < deadband){return 0;}
-	else{return joystick.joy1_y1 / 127 * drivepower;}
-}
-
-float rightdrive()
-{
-	if(ABS(joystick.joy1_y2) < deadband){return 0;}
-	else{return joystick.joy1_y2 / 127 * drivepower;}
-}
 
 float drivepower;
 // is the servo reversed
@@ -37,12 +25,27 @@ bool revmode;
 // a position variable for the servo
 float servoposition = 100;
 
-// joystick deadband
-#define deadband 5
 // power values for drivetrain
-#define lowpower 15
-#define normpower 39
-#define highpower 78
+#define lowpower 15.0
+#define normpower 39.0
+#define highpower 78.0
+
+// joystick deadband
+#define deadband 5.0
+
+// defines to calculate left and right drive powers
+float leftdrive()
+{
+	if(ABS(joystick.joy1_y2) < deadband){return 0;}
+	else{return joystick.joy1_y2 / 127.0 * drivepower;}
+}
+
+float rightdrive()
+{
+	if(ABS(joystick.joy1_y1) < deadband){return 0;}
+	else{return joystick.joy1_y1 / 127.0 * drivepower;}
+}
+
 
 /* ========< Maths >========= */
 #define PI 3.14159265358979323846
