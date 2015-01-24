@@ -58,7 +58,7 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 #define WHEEL_DIAMETER 3.5 // in
 #define WHEEL_CIRCUMFRENCE PI * WHEEL_DIAMETER
 
-#define tickscale 1000
+#define tickscale 1140.0
 
 void drive_r(float rotations, float power) {
 	// reset motor encoders
