@@ -3,6 +3,7 @@
 #pragma config(Motor,  mtr_S1_C1_2,     Drive_L,       tmotorTetrix, PIDControl, driveLeft, encoder)
 #pragma config(Servo,  srvo_S1_C2_1,		GoalGrabber1, tServoStandard)
 #pragma config(Servo,  srvo_S1_C2_2,    GoalGrabber2, tServoStandard)
+#pragma systemFile            // eliminates warning for "unreferenced" functions
 
 #include "Header.h"
 
