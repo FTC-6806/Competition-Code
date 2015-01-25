@@ -53,9 +53,9 @@ task DriveReverse()
 task Gunner() {
 	while (true) {
 		if ((joystick.joy2_y1 < -30) && (servoposition > 0)) {
-			servoposition -= 0.2;
+			servoposition -= 0.27;
 		} else if ((joystick.joy2_y1 > 30) && (servoposition < 255)) {
-			servoposition += 0.2;
+			servoposition += 0.27;
 		}
 		servo[GoalGrabber1] = map(servoposition, 0, 360, 0, 255);
 	}
