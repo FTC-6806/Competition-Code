@@ -7,8 +7,8 @@
 
 task main() {
 	int delayms = 1000 * get_delay_prompt();
-	wait_for_start();
-	delay1Msec(delayms);
-	drive_distance(12, 39); // Drive 1 foot at 1/2 power 
+	waitForStart();
+	wait1Msec(delayms);
+	drive_distance(12, 39); // Drive 1 foot at 1/2 power
 	// (which is actually 39% percent because neverest encoders)
 }
