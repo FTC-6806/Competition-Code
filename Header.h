@@ -111,7 +111,7 @@ void drive_d(float distance, float power) {
 }
 
 void turn(float degrees, float power) {
-	t = (t / 360) * fullturn;
+	float t = (degrees / 360) * fullturn;
 
 	// reset motor encoders
 	nMotorEncoder[Drive_L] = 0;
