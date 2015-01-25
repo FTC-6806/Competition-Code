@@ -6,5 +6,5 @@
 #include "Header.h"
 
 task main() {
-	get_delay_prompt();
+	wait1Msec(1000 * get_delay_prompt());
 }
