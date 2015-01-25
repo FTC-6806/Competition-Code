@@ -85,29 +85,8 @@ void drive_rotations(float rotations, float power) {
 	motor[Drive_L] = 0;
 }
 
-	float rotations = distance / WHEEL_CIRCUMFRENCE;
-
-	// reset motor encoders
-	nMotorEncoder[Drive_R] = 0;
-	nMotorEncoder[Drive_L] = 0;
-
-	wait1Msec(75);
-
-	nMotorEncoderTarget[Drive_R] = tickscale * rotations;
-	nMotorEncoderTarget[Drive_L] = tickscale * rotations;
-
-	// turn motors on
-	motor[Drive_R] = power;
-	motor[Drive_L] = power;
-
-	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
-		// wait for the motors to come to an idle state
-	}
-
-	// turn motors off
-	motor[Drive_R] = 0;
-	motor[Drive_L] = 0;
 void drive_distance(float distance, float power) {
+	drive_rotations(distance / WHEEL_CIRCUMFRENCE, power);
 }
 
 void turn_degrees(float degrees, float power) {
