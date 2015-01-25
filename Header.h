@@ -125,14 +125,18 @@ void turn_degrees(float degrees, float power) {
 #define is_nxt_button_pressed(btn) nNxtButtonPressed == btn
 
 int get_delay_prompt() {
-	int delay = 0;
-	while (!is_nxt_button_pressed(kEnterButton)) {
+	int delay_time = 0;
+	wait1Msec(1000);
+	while (!(is_nxt_button_pressed(kEnterButton))) {
 		if (is_nxt_button_pressed(kRightButton)) {
-			delay += 1;
-		} else if (is_nxt_button_pressed(kLeftButton)) {
-			delay -= 1;
+			delay_time += 1;
+
+		} else if (is_nxt_button_pressed(kLeftButton) && delay_time > 0) {
+			delay_time -= 1;
 		}
+		displayStringAt(0, 63, "delay: %i", delay_time);
+		wait1Msec(500);
 	}
-	
-	return delay
+
+	return delay_time;
 }
