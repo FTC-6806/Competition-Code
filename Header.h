@@ -59,8 +59,8 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 //#define WHEEL_DIAMETER 3.5 // in
 #define WHEEL_CIRCUMFRENCE 12.25 //in
 
-#define tickscale 1557.0
-#define fullturn 6228.0
+#define tickscale 1561.0
+#define fullturn tickscale * 4.0
 
 void drive_rotations(float rotations, float power) {
 	// reset motor encoders

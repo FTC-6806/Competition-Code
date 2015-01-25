@@ -6,5 +6,5 @@
 #include "Header.h"
 
 task main() {
-	turn_degrees(360 * 8, 100);
+	drive_distance(12, 39);
 }
