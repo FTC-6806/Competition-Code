@@ -62,7 +62,7 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 #define tickscale 1557.0
 #define fullturn 1557.0
 
-void drive_r(float rotations, float power) {
+void drive_rotations(float rotations, float power) {
 	// reset motor encoders
 	nMotorEncoder[Drive_R] = 0;
 	nMotorEncoder[Drive_L] = 0;
@@ -85,7 +85,6 @@ void drive_r(float rotations, float power) {
 	motor[Drive_L] = 0;
 }
 
-void drive_d(float distance, float power) {
 	float rotations = distance / WHEEL_CIRCUMFRENCE;
 
 	// reset motor encoders
@@ -108,10 +107,11 @@ void drive_d(float distance, float power) {
 	// turn motors off
 	motor[Drive_R] = 0;
 	motor[Drive_L] = 0;
+void drive_distance(float distance, float power) {
 }
 
-void turn(float degrees, float power) {
-	float t = (degrees / 360) * fullturn;
+void turn_degrees(float degrees, float power) {
+	float t = (degrees / 360.0) * fullturn;
 
 	// reset motor encoders
 	nMotorEncoder[Drive_L] = 0;
