@@ -6,5 +6,7 @@
 #include "Header.h"
 
 task main() {
-	drive_r(10, 100);
+	drive_r(1, 100);
+	drive_d(-1, 100);
+	turn(360, 100);
 }
