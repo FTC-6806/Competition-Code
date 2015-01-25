@@ -56,11 +56,11 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 
 /* ========< Driving functions for autonomous >======== */
 
-#define WHEEL_DIAMETER 3.5 // in
-#define WHEEL_CIRCUMFRENCE PI * WHEEL_DIAMETER
+//#define WHEEL_DIAMETER 3.5 // in
+#define WHEEL_CIRCUMFRENCE 12.25 //in
 
-#define tickscale 1140.0
-#define fullturn 5500
+#define tickscale 1557.0
+#define fullturn 1557.0
 
 void drive_r(float rotations, float power) {
 	// reset motor encoders
