@@ -108,3 +108,32 @@ void drive_d(float distance, float power) {
 	motor[Drive_R] = 0;
 	motor[Drive_L] = 0;
 }
+
+void turn(float degrees, float power) {
+	// reset motor encoders
+	nMotorEncoder[Drive_L] = 0;
+	nMotorEncoder[Drive_R] = 0;
+
+	wait1Msec(75); // let encoders settle
+
+	if (t > 0) {
+		nMotorEncoder[Drive_R] = -1 * t;
+		nMotorEncoder[Drive_L] = t;
+
+		motor[Drive_R] = -1 * power;
+		motor[Drive_L] = power;
+	} else if (t < 0) {
+		nMotorEncoder[Drive_R] = t;
+		nMotorEncoder[Drive_L] = -1 * t;
+
+		motor[Drive_R] = power;
+		motor[Drive_L] = -1 * power;
+	}
+
+	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
+		// wait for the motors to come to an idle state
+	}
+
+	motor[Drive_R] = 0;
+	motor[Drive_L] = 0;
+}
