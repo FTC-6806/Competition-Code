@@ -69,12 +69,12 @@ void drive_rotations(float rotations, float power) {
 
 	wait1Msec(75);
 
-	nMotorEncoderTarget[Drive_R] = tickscale * rotations;
-	nMotorEncoderTarget[Drive_L] = tickscale * rotations;
+	nMotorEncoderTarget[Drive_R] = ABS(tickscale * rotations);
+	nMotorEncoderTarget[Drive_L] = ABS(tickscale * rotations);
 
 	// turn motors on
-	motor[Drive_R] = power;
-	motor[Drive_L] = power;
+	motor[Drive_R] = power * ((rotations > 0) ? 1 : -1);
+	motor[Drive_L] = power * ((rotations > 0) ? 1 : -1);
 
 	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
 		// wait for the motors to come to an idle state
