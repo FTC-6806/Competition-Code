@@ -119,3 +119,20 @@ void turn_degrees(float degrees, float power) {
 	motor[Drive_R] = 0;
 	motor[Drive_L] = 0;
 }
+
+/* =========< Interfacing >======== */
+#define nxt_button_pressed() nNxtButtonPressed != kNoButton
+#define is_nxt_button_pressed(btn) nNxtButtonPressed == btn
+
+int get_delay_prompt() {
+	int delay = 0;
+	while (!is_nxt_button_pressed(kEnterButton)) {
+		if (is_nxt_button_pressed(kRightButton)) {
+			delay += 1;
+		} else if (is_nxt_button_pressed(kLeftButton)) {
+			delay -= 1;
+		}
+	}
+	
+	return delay
+}
