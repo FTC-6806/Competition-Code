@@ -60,7 +60,7 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 #define WHEEL_CIRCUMFRENCE 12.25 //in
 
 #define tickscale 1557.0
-#define fullturn 1557.0
+#define fullturn 6228.0
 
 void drive_rotations(float rotations, float power) {
 	// reset motor encoders
@@ -99,14 +99,14 @@ void turn_degrees(float degrees, float power) {
 	wait1Msec(75); // let encoders settle
 
 	if (t > 0) {
-		nMotorEncoder[Drive_R] = -1 * t;
-		nMotorEncoder[Drive_L] = t;
+		nMotorEncoderTarget[Drive_R] = -1 * t;
+		nMotorEncoderTarget[Drive_L] = t;
 
 		motor[Drive_R] = -1 * power;
 		motor[Drive_L] = power;
 	} else if (t < 0) {
-		nMotorEncoder[Drive_R] = t;
-		nMotorEncoder[Drive_L] = -1 * t;
+		nMotorEncoderTarget[Drive_R] = t;
+		nMotorEncoderTarget[Drive_L] = -1 * t;
 
 		motor[Drive_R] = power;
 		motor[Drive_L] = -1 * power;
