@@ -70,17 +70,13 @@ task main()
 
 	while(true)
 	{
-		if(driverstop){
+		if(driverstop || gunnerstop){
 			stopTask(Driver);
+			stopTask(Gunner);
 			motor[Drive_R] = 0;
 			motor[Drive_L] = 0;
-			while(driverstop){wait1Msec(1);}
+			while(driverstop || gunnerstop){wait1Msec(1);}
 			startTask(Driver);
-		}
-
-		if(gunnerstop){
-			stopTask(Gunner);
-			while(gunnerstop){wait1Msec(1);}
 			startTask(Gunner);
 		}
 	}
