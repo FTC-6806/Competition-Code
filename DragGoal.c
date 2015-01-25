@@ -44,5 +44,5 @@ task main() {
 	turn_degrees(30, 50);
 	drive_distance(6,50);
 	turn_degrees(30, 50);
-	drive_distance(20,50);
+	drive_distance(6*12,50);
 }
