@@ -60,6 +60,7 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 #define WHEEL_CIRCUMFRENCE PI * WHEEL_DIAMETER
 
 #define tickscale 1140.0
+#define fullturn 5500
 
 void drive_r(float rotations, float power) {
 	// reset motor encoders
@@ -110,6 +111,8 @@ void drive_d(float distance, float power) {
 }
 
 void turn(float degrees, float power) {
+	t = (t / 360) * fullturn;
+
 	// reset motor encoders
 	nMotorEncoder[Drive_L] = 0;
 	nMotorEncoder[Drive_R] = 0;
