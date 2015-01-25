@@ -6,5 +6,5 @@
 #include "Header.h"
 
 task main() {
-	turn_degrees(180, 100);
+	turn_degrees(360 * 8, 100);
 }
