@@ -6,8 +6,8 @@
 #define driverstop joy1Btn(3)
 #define gunnerstop joy2Btn(3)
 #define revbut joy1Btn(1)
-#define drivefast  joy1Btn(5)//||joy1Btn(6)
-#define driveslow joy1Btn(7)//||joy1Btn(8)
+#define drivefast  joy1Btn(5)||joy1Btn(6)
+#define driveslow joy1Btn(7)||joy1Btn(8)
 
 /* ========< Drivetrain and mechanism >======== */
 
