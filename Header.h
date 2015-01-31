@@ -56,6 +56,38 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 }
 
 /* ========< Driving functions for autonomous >======== */
+#include "hitechnic-gyro.h"
+
+// Current heading of the robot
+float currHeading = 0;
+
+tHTGYRO gyroSensor;
+
+// Task to keep track of the current heading using the HT Gyro
+task getHeading () {
+	float delTime = 0;
+	float prevHeading = 0;
+	float curRate = 0;
+
+	sensorCalibrate(&gyroSensor);
+	playSound(soundBeepBeep);
+	while (true) {
+		time1[T1] = 0;
+		readSensor(&gyroSensor);
+		curRate = gyroSensor.rotation;
+		if (abs(curRate) > 3) {
+			prevHeading = currHeading;
+			currHeading = prevHeading + curRate * delTime;
+			if (currHeading > 360) currHeading -= 360;
+			else if (currHeading < 0) currHeading += 360;
+		}
+		displayTextLine(0, "heading %f", currHeading);
+		wait1Msec(5);
+		delTime = ((float)time1[T1]) / 1000;
+		//delTime /= 1000;
+	}
+}
+
 
 //#define WHEEL_DIAMETER 3.5 // in
 #define WHEEL_CIRCUMFRENCE 12.25 //in
