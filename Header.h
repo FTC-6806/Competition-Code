@@ -60,17 +60,19 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 
 // Current heading of the robot
 float currHeading = 0;
+float prevHeading = 0;
+
 
 tHTGYRO gyroSensor;
+bool gyroCalibrated = false;
 
 // Task to keep track of the current heading using the HT Gyro
 task getHeading () {
 	float delTime = 0;
-	float prevHeading = 0;
 	float curRate = 0;
 
 	sensorCalibrate(&gyroSensor);
-	playSound(soundBeepBeep);
+	gyroCalibrated = true;
 	while (true) {
 		time1[T1] = 0;
 		readSensor(&gyroSensor);
@@ -81,7 +83,7 @@ task getHeading () {
 			if (currHeading > 360) currHeading -= 360;
 			else if (currHeading < 0) currHeading += 360;
 		}
-		displayTextLine(0, "heading %f", currHeading);
+		//displayTextLine(0, "heading %f", currHeading);
 		wait1Msec(5);
 		delTime = ((float)time1[T1]) / 1000;
 		//delTime /= 1000;
@@ -109,7 +111,8 @@ void drive_rotations(float rotations, float power) {
 	motor[Drive_L] = power * ((rotations > 0) ? 1 : -1);
 
 	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
-		// wait for the motors to come to an idle state
+		float drivedrift = currHeading - prevHeading;
+		displayTextLine(0, "drivedrift: %f", drivedrift);
 	}
 
 	// turn motors off

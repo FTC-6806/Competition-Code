@@ -9,6 +9,8 @@ task main() {
 	initSensor(&gyroSensor, S2);
 	startTask(getHeading);
 	while (!gyroCalibrated) {}
+	playSound(soundBeepBeep);
 	drive_distance(12, 100);
+	while(!getXbuttonValue(xButtonEnter)) {}
 	//playSound(soundFastUpwardTones);
 }
