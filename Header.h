@@ -89,74 +89,28 @@ task getHeading () {
 }
 
 // pid
-
-#define PID_MAX_DRIVE       100
-#define PID_MIN_DRIVE     (-100)
-
-#define PID_MIN_ERROR 30
-
-#define PID_INTEGRAL_LIMIT  50
-
 float  pid_Kp = 2.0;
 float  pid_Ki = 0.04;
 float  pid_Kd = 0.0;
 
 float lTarget;
 float rTarget;
-bool lAttained;
-bool rAttained;
 bool pidRunning = true;
 
 task pidControl() {
 	float rCurrentValue;
 	float lCurrentValue;
-	float lPidIntegral;
-	float rPidIntegral;
-	float lPidDerivative;
-	float rPidDerivative;
-	float lPidDrive;
-	float rPidDrive;
-	float lPidError;
-	float rPidError;
-	float lPidLastError;
-	float rPidLastError;
+	float pidIntegral;
+	float pidDerivative;
+	float pidDrive;
+	float pidError;
+	float pidLastError;
 
 	nMotorEncoder[Drive_L] = 0; nMotorEncoder[Drive_R] = 0;
 
 	while (true) {
 		if (pidRunning) {
-			lCurrentValue = nMotorEncoder[Drive_L];
-			rCurrentValue = nMotorEncoder[Drive_R];
-
-			lPidError = lCurrentValue - lTarget; rPidError = rCurrentValue - rTarget;
-
-			if (lPidError < PID_MIN_ERROR) {lPidError = 0; lAttained = true;} else {lAttained=false;}
-			if (rPidError < PID_MIN_ERROR) {rPidError = 0; rAttained = true;} else {rAttained=false;}
-
-			if (pid_Ki != 0) {
-				if (abs(lPidError) < PID_INTEGRAL_LIMIT) {
-					lPidIntegral += lPidError;
-				} else {
-					lPidIntegral = 0; rPidIntegral = 0;
-				}
-
-				if (abs(rPidError) < PID_INTEGRAL_LIMIT) {
-					rPidIntegral += rPidError;
-				} else {
-					rPidIntegral = 0;
-				}
-			}
-
-			lPidDerivative = lPidError - lPidLastError; rPidDerivative = rPidError - rPidLastError;
-			lPidLastError = lPidError; rPidLastError = rPidError;
-
-			lPidDrive = (pid_Kp * lPidError) + (pid_Ki * lPidIntegral) + (pid_Kd * lPidDerivative);
-			rPidDrive = (pid_Kp * rPidError) + (pid_Ki * rPidIntegral) + (pid_Kd * rPidDerivative);
-
-			lPidDrive = MAX(lPidDrive, PID_MAX_DRIVE); lPidDrive = MIN(lPidDrive, PID_MIN_DRIVE);
-			rPidDrive = MAX(rPidDrive, PID_MAX_DRIVE); rPidDrive = MIN(rPidDrive, PID_MIN_DRIVE);
-
-			motor[Drive_L] = lPidDrive; motor[Drive_R] = rPidDrive;
+			
 		}
 	}
 
@@ -169,15 +123,26 @@ task pidControl() {
 #define fullturn tickscale * 4.0
 
 void drive_rotations(float rotations, float power) {
-	nMotorEncoder[Drive_L] = 0;
+	// reset motor encoders
 	nMotorEncoder[Drive_R] = 0;
+	nMotorEncoder[Drive_L] = 0;
 
-	delay(75);
+	wait1Msec(75);
 
-	lTarget = rotations * tickscale;
-	rTarget = rotations * tickscale;
+	nMotorEncoderTarget[Drive_R] = ABS(tickscale * rotations);
+	nMotorEncoderTarget[Drive_L] = ABS(tickscale * rotations);
 
-	while (!lAttained || !rAttained) {}
+	// turn motors on
+	motor[Drive_R] = power * ((rotations > 0) ? 1 : -1);
+	motor[Drive_L] = power * ((rotations > 0) ? 1 : -1);
+
+	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
+		// wait for the motors to come to an idle state
+	}
+
+	// turn motors off
+	motor[Drive_R] = 0;
+	motor[Drive_L] = 0;
 }
 
 void drive_distance(float distance, float power) {
@@ -185,12 +150,31 @@ void drive_distance(float distance, float power) {
 }
 
 void turn_degrees(float degrees, float power) {
+	float t = (degrees / 360.0) * fullturn;
 
 	// reset motor encoders
 	nMotorEncoder[Drive_L] = 0;
 	nMotorEncoder[Drive_R] = 0;
 
 	wait1Msec(75); // let encoders settle
+
+	if (t > 0) {
+		nMotorEncoderTarget[Drive_R] = -1 * t;
+		nMotorEncoderTarget[Drive_L] = t;
+
+		motor[Drive_R] = -1 * power;
+		motor[Drive_L] = power;
+	} else if (t < 0) {
+		nMotorEncoderTarget[Drive_R] = t;
+		nMotorEncoderTarget[Drive_L] = -1 * t;
+
+		motor[Drive_R] = power;
+		motor[Drive_L] = -1 * power;
+	}
+
+	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
+		// wait for the motors to come to an idle state
+	}
 
 	motor[Drive_R] = 0;
 	motor[Drive_L] = 0;
