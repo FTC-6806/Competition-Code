@@ -88,34 +88,6 @@ task getHeading () {
 	}
 }
 
-// pid
-float  pid_Kp = 2.0;
-float  pid_Ki = 0.04;
-float  pid_Kd = 0.0;
-
-float lTarget;
-float rTarget;
-bool pidRunning = true;
-
-task pidControl() {
-	float rCurrentValue;
-	float lCurrentValue;
-	float pidIntegral;
-	float pidDerivative;
-	float pidDrive;
-	float pidError;
-	float pidLastError;
-
-	nMotorEncoder[Drive_L] = 0; nMotorEncoder[Drive_R] = 0;
-
-	while (true) {
-		if (pidRunning) {
-			
-		}
-	}
-
-}
-
 //#define WHEEL_DIAMETER 3.5 // in
 #define WHEEL_CIRCUMFRENCE 12.25 //in
 
