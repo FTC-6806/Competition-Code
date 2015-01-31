@@ -12,7 +12,7 @@ task main() {
 	startTask(getHeading);
 	//waitForStart();
 	wait1Msec(5000);
-	drive_rotations(1, 39);
+	drive_rotations(0.5, 39);
 	////int delayms = 1000 * get_delay_prompt();
 	//waitForStart();
 	////wait1Msec(delayms);
