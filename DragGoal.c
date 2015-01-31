@@ -52,4 +52,6 @@ task main() {
 	drive_distance(4*12, 50);
 	turn_degrees(90,50);
 	drive_distance(3*12,50);
+	initSensor(&gyroSensor, S2);
+	startTask(getHeading);
 }
