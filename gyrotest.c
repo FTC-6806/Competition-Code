@@ -10,7 +10,7 @@ task main() {
 	startTask(getHeading);
 	while (!gyroCalibrated) {}
 	playSound(soundBeepBeep);
-	drive_distance(12, 100);
+	drive_distance(-12 * 8, 100);
 	while(!getXbuttonValue(xButtonEnter)) {}
 	//playSound(soundFastUpwardTones);
 }
