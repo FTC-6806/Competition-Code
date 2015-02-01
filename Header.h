@@ -62,6 +62,9 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 float currHeading = 0;
 float prevHeading = 0;
 
+float totalDrift = 0;
+
+float drivedrift_timeslice = 0;
 
 tHTGYRO gyroSensor;
 bool gyroCalibrated = false;
@@ -96,6 +99,8 @@ task getHeading () {
 #define tickscale 1575.0
 #define fullturn tickscale * 4.0
 
+#define DRIFT_MULTIPLIER 1
+
 void drive_rotations(float rotations, float power) {
 	// reset motor encoders
 	nMotorEncoder[Drive_R] = 0;
@@ -111,8 +116,18 @@ void drive_rotations(float rotations, float power) {
 	motor[Drive_L] = power * ((rotations > 0) ? 1 : -1);
 
 	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
-		float drivedrift = currHeading - prevHeading;
-		displayTextLine(0, "drivedrift: %f", drivedrift);
+		drivedrift_timeslice = currHeading - prevHeading;
+		if (drivedrift_timeslice > 0) {
+			motor[Drive_R] = motor[Drive_R] + drivedrift_timeslice * DRIFT_MULTIPLIER;
+			motor[Drive_L] = motor[Drive_L] - (drivedrift_timeslice * DRIFT_MULTIPLIER);
+		} else if (drivedrift_timeslice < 0) {
+			motor[Drive_L] = motor[Drive_L] + drivedrift_timeslice * DRIFT_MULTIPLIER;
+			motor[Drive_R] = motor[Drive_R] - (drivedrift_timeslice * DRIFT_MULTIPLIER);
+		}
+		displayTextLine(0, "ddt: %f", drivedrift_timeslice);
+		totalDrift += drivedrift_timeslice;
+		displayTextLine(1, "total: %f", totalDrift);
+		displayTextLine(2, "lp: %f", motor[Drive_L]);
 	}
 
 	// turn motors off
