@@ -58,13 +58,7 @@ double map(double x, double in_min, double in_max, double out_min, double out_ma
 /* ========< Driving functions for autonomous >======== */
 #include "hitechnic-gyro.h"
 
-// Current heading of the robot
-float currHeading = 0;
-float prevHeading = 0;
 
-float totalDrift = 0;
-
-float drivedrift_timeslice = 0;
 
 tHTGYRO gyroSensor;
 bool gyroCalibrated = false;
