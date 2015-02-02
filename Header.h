@@ -111,12 +111,14 @@ void drive_rotations(float rotations, float power) {
 
 	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
 		drivedrift_timeslice = currHeading - prevHeading;
-		if (drivedrift_timeslice > 0) {
-			motor[Drive_R] = motor[Drive_R] + drivedrift_timeslice * DRIFT_MULTIPLIER;
-			motor[Drive_L] = motor[Drive_L] - (drivedrift_timeslice * DRIFT_MULTIPLIER);
-		} else if (drivedrift_timeslice < 0) {
-			motor[Drive_L] = motor[Drive_L] + drivedrift_timeslice * DRIFT_MULTIPLIER;
-			motor[Drive_R] = motor[Drive_R] - (drivedrift_timeslice * DRIFT_MULTIPLIER);
+		if (ABS(drivedrift_timeslice) > 0.075) {
+			if (drivedrift_timeslice > 0) {
+				nMotorEncoder[Drive_R] = nMotorEncoder[Drive_R] - (drivedrift_timeslice * DRIFT_MULTIPLIER);
+				nMotorEncoder[Drive_L] = nMotorEncoder[Drive_L] + (drivedrift_timeslice * DRIFT_MULTIPLIER);
+			} else if (drivedrift_timeslice < 0) {
+				nMotorEncoder[Drive_R] = nMotorEncoder[Drive_R] + (drivedrift_timeslice * DRIFT_MULTIPLIER);
+				nMotorEncoder[Drive_L] = nMotorEncoder[Drive_L] - (drivedrift_timeslice * DRIFT_MULTIPLIER);
+			}
 		}
 		displayTextLine(0, "ddt: %f", drivedrift_timeslice);
 		totalDrift += drivedrift_timeslice;
