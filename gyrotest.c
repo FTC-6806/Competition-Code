@@ -3,14 +3,6 @@
 #pragma config(Motor,  mtr_S1_C1_1,     Drive_L,       tmotorTetrix, PIDControl, reversed, driveLeft, encoder)
 #pragma config(Servo,  srvo_S1_C2_1,		GoalGrabber1, tServoStandard)
 
-// Current heading of the robot
-float currHeading = 0;
-float prevHeading = 0;
-
-float totalDrift = 0;
-
-float drivedrift_timeslice = 0;
-
 #include "Header.h"
 
 task main() {
@@ -18,7 +10,7 @@ task main() {
 	startTask(getHeading);
 	while (!gyroCalibrated) {}
 	playSound(soundBeepBeep);
-	drive_distance(-12 * 5, 100);
+	drive_distance(12 * 5, 100);
 	while(!getXbuttonValue(xButtonEnter)) {}
 	//playSound(soundFastUpwardTones);
 }
