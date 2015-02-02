@@ -93,7 +93,7 @@ task getHeading () {
 #define tickscale 1575.0
 #define fullturn tickscale * 4.0
 
-#define DRIFT_MULTIPLIER 1
+#define DRIFT_MULTIPLIER 1000
 
 void drive_rotations(float rotations, float power) {
 	// reset motor encoders

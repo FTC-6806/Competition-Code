@@ -13,15 +13,12 @@ float drivedrift_timeslice = 0;
 
 #include "Header.h"
 
-float totaldr = 0;
-
 task main() {
 	initSensor(&gyroSensor, S2);
 	startTask(getHeading);
 	while (!gyroCalibrated) {}
 	playSound(soundBeepBeep);
-	drive_distance(12, 100);
-	totaldr = totalDrift;
+	drive_distance(-12 * 5, 100);
 	while(!getXbuttonValue(xButtonEnter)) {}
 	//playSound(soundFastUpwardTones);
 }
