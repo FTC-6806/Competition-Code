@@ -48,15 +48,15 @@ task DriveReverse()
 }
 
 task Gunner() {
-	while (true) {
-		if ((joystick.joy2_y1 < -30) && ( servoposition > (downoverride ? 0 : 54))) {
-			servoposition -= 0.27;
-		} else if ((joystick.joy2_y1 > 30) && (servoposition < 230)) {
-			servoposition += 0.27;
-		}
-		servo[GoalGrabber1] = map(servoposition, 0, 360, 0, 255);
-		//displayStringAt(0, 63, "%i sp", servoposition);
-	}
+	//while (true) {
+	//	if ((joystick.joy2_y1 < -30) && ( servoposition > (downoverride ? 0 : 54))) {
+	//		servoposition -= 0.27;
+	//	} else if ((joystick.joy2_y1 > 30) && (servoposition < 230)) {
+	//		servoposition += 0.27;
+	//	}
+	//	servo[GoalGrabber1] = map(servoposition, 0, 360, 0, 255);
+	//	//displayStringAt(0, 63, "%i sp", servoposition);
+	//}
 }
 
 task main()
