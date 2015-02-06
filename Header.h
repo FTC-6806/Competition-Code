@@ -111,8 +111,7 @@ void drive_rotations(float rotations, float power) {
 	motor[Drive_L] = power * ((rotations > 0) ? 1 : -1);
 
 	while(nMotorRunState[Drive_L] != runStateIdle || nMotorRunState[Drive_R] != runStateIdle) {
-		float drivedrift = currHeading - prevHeading;
-		displayTextLine(0, "drivedrift: %f", drivedrift);
+		// do nothing
 	}
 
 	// turn motors off
