@@ -50,6 +50,10 @@ task DriveReverse()
 }
 
 task Gunner() {
+	while (true) {
+		motor[Front_Arm] = frontarm();
+		motor[Back_Arm] = backarm();
+	}
 }
 
 task main()
