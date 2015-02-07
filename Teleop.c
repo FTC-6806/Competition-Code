@@ -1,6 +1,8 @@
 #pragma config(Hubs,  S1, HTMotor, HTMotor, none,  none)
 #pragma config(Motor,  mtr_S1_C1_2,     Drive_R,       tmotorTetrix, PIDControl, driveRight, encoder)
 #pragma config(Motor,  mtr_S1_C1_1,     Drive_L,       tmotorTetrix, PIDControl, reversed, driveLeft, encoder)
+#pragma config(Motor, mtr_S1_C2_1,			Back_Arm,      tmotorTetrix, PIDControl, encoder);
+#pragma config(Motor, mtr_S1_C2_2,			Front_Arm,      tmotorTetrix, PIDControl, encoder);
 
 #include "Header.h"
 
