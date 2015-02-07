@@ -9,6 +9,7 @@
 #define revbut joy1Btn(1)
 #define drivefast  joy1Btn(5)||joy1Btn(6)
 #define driveslow joy1Btn(7)||joy1Btn(8)
+#define resettozero joy2Btn(4)
 
 /* ========< Drivetrain and mechanism >======== */
 
@@ -43,18 +44,6 @@ float rightdrive()
 {
 	if(ABS(joystick.joy1_y2) < deadband){return 0;}
 	else{return joystick.joy1_y2 / 127.0 * drivepower;}
-}
-
-#define ARMPOWER 1
-
-float backarm() {
-	if(ABS(joystick.joy2_y1) < deadband){return 0;}
-	else{return joystick.joy2_y1 / 127.0 * ARMPOWER;}
-}
-
-float frontarm() {
-	if(ABS(joystick.joy2_y2) < deadband){return 0;}
-	else{return joystick.joy2_y2 / 127.0 * ARMPOWER;}
 }
 
 
