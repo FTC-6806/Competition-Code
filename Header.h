@@ -45,6 +45,19 @@ float rightdrive()
 	else{return joystick.joy1_y2 / 127.0 * drivepower;}
 }
 
+#define ARMPOWER 1
+
+float backarm() {
+	if(ABS(joystick.joy2_y1) < deadband){return 0;}
+	else{return joystick.joy2_y1 / 127.0 * ARMPOWER;}
+}
+
+float frontarm() {
+	if(ABS(joystick.joy2_y2) < deadband){return 0;}
+	else{return joystick.joy2_y2 / 127.0 * ARMPOWER;}
+}
+
+
 /* ========< Maths >========= */
 
 #define PI 3.14159265358979323846
