@@ -9,6 +9,7 @@ task Driver()
 {
 	while(true)
 	{
+		getJoystickSettings(joystick);
 		if(drivefast) {
 			drivepower = highpower;
 		} else if (driveslow) {
@@ -27,14 +28,7 @@ task Driver()
 			motor[Drive_L] = -1*rightdrive();
 			motor[Drive_R] = -1*leftdrive();
 		}
-	}
-}
 
-task DriveReverse()
-{
-	while(true)
-	{
-		getJoystickSettings(joystick);
 		if(revbut && revmode)
 		{
 			revmode = false;
@@ -45,12 +39,8 @@ task DriveReverse()
 			revmode = true;
 			while(revbut){wait1Msec(1);}
 		}
-	}
-}
 
-task Gunner() {
-	while (true) {
-		wait1Msec(50);
+		// -- gunner
 		motor[Back_Arm] = map(joystick.joy2_y1, -128, 128, -15, 15);
 	}
 }
@@ -59,20 +49,16 @@ task main()
 {
 	waitForStart();
 	startTask(Driver);
-	startTask(DriveReverse);
-	startTask(Gunner);
 
 	while(true)
 	{
 		if(driverstop || gunnerstop){
 			stopTask(Driver);
-			stopTask(Gunner);
 			motor[Drive_R] = 0;
 			motor[Drive_L] = 0;
 			motor[Back_Arm] = 0;
 			while(driverstop || gunnerstop){wait1Msec(1);}
 			startTask(Driver);
-			startTask(Gunner);
 		}
 	}
 }
